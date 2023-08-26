@@ -6,7 +6,7 @@ import discord
 
 
 bot = discord.Bot(intents=discord.Intents.all(),case_insensitive=True,help_command=None)
-bot.author_id = 801058284106678273  
+bot.author_id = # Your ID  
 key = os.environ['BOT_TOKEN']
 
 
