@@ -12,7 +12,7 @@ class gpt(commands.Cog,name='gpt'):
   @slash_command(name='ask',description='Ask Chat GPT any questions. Warning: This might not work if my API key expires')
   async def ask(self,ctx,prompt:str):
     await ctx.respond("Please wait...",delete_after=1)
-    openai.api_key = os.environ['API_KEY']
+    openai.api_key = os.environ['OPENAI_KEY']
     try:
       completion= openai.ChatCompletion.create(
         model= "gpt-3.5-turbo",
