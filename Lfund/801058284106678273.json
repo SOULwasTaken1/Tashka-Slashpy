@@ -1,0 +1,86 @@
+[
+  {
+    "amount": "+180",
+    "time": "01:18:3",
+    "date": "2023-05-22",
+    "note": "No notes",
+    "current": 1180
+  },
+  {
+    "amount": "-60",
+    "time": "14:42:3",
+    "date": "2023-05-22",
+    "note": "ice cream, school",
+    "current": 1120
+  },
+  {
+    "amount": "-20",
+    "time": "00:39:2",
+    "date": "2023-05-23",
+    "note": "coaching",
+    "current": 1100
+  },
+  {
+    "amount": "+200",
+    "time": "16:34:4",
+    "date": "2023-05-23",
+    "note": "water",
+    "current": 1300
+  },
+  {
+    "amount": "+40",
+    "time": "16:34:4",
+    "date": "2023-05-23",
+    "note": "school",
+    "current": 1340
+  },
+  {
+    "amount": "-30",
+    "time": "16:34:5",
+    "date": "2023-05-23",
+    "note": "school",
+    "current": 1310
+  },
+  {
+    "amount": "+140",
+    "time": "19:23:1",
+    "date": "2023-05-24",
+    "note": "school",
+    "current": 1450
+  },
+  {
+    "amount": "-40",
+    "time": "19:23:2",
+    "date": "2023-05-24",
+    "note": "school",
+    "current": 1410
+  },
+  {
+    "amount": "+600",
+    "time": "20:04:1",
+    "date": "2023-06-29",
+    "note": "No notes",
+    "current": 2010
+  },
+  {
+    "amount": "-300",
+    "time": "19:48:4",
+    "date": "2023-08-05",
+    "note": "recalculation",
+    "current": 1710
+  },
+  {
+    "amount": "+300",
+    "time": "14:47:1",
+    "date": "2023-08-14",
+    "note": "more savings",
+    "current": 2010
+  },
+  {
+    "amount": "+1000",
+    "time": "14:47:3",
+    "date": "2023-08-14",
+    "note": "assignment",
+    "current": 3010
+  }
+]
