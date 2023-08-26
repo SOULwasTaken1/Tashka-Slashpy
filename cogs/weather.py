@@ -16,7 +16,7 @@ class weather(commands.Cog,name='weather'):
     try:
       url = "http://api.weatherapi.com/v1/current.json"
       params = {
-        "key" : os.environ['WKEY'],
+        "key" : os.environ['WEATHER_KEY'],
         "q" : city
       }
       async with aiohttp.ClientSession() as session:
