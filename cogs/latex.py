@@ -8,6 +8,7 @@ import matplotlib.font_manager as font_manager
 import os
 from typing import Optional
 import numpy as np
+import re
 
 
 COLORS = [
@@ -15,6 +16,22 @@ COLORS = [
     'orange', 'purple', 'brown', 'pink', 'gray', 'gold', 'silver',
     'navy', 'lime', 'teal', 'aqua', 'fuchsia', 'maroon', 'olive', 'indigo'
 ]
+
+def calculate_value(num_str):
+    if re.match(r'^log\d+$', num_str):
+        base = int(num_str[3:])
+        return np.log(base)
+    elif re.match(r'^\d+\^\d+$', num_str):
+        base, exponent = map(int, num_str.split('^'))
+        return np.power(base, exponent)
+    else:
+        try:
+            return int(num_str)
+        except ValueError:
+            try:
+                return float(num_str)
+            except ValueError:
+                return num_str
 
 
 def plot_three_lines(y1_data, save_path, y2_data=None, y3_data=None, line1_color='orange', line2_color='cyan', line3_color='magenta'):
@@ -145,15 +162,15 @@ class latex(commands.Cog,name='latex'):
                   ephemeral:Optional[bool]=False
                  ):
     x_arr_s = line_1.split(',')
-    x_arr = [int(num) for num in x_arr_s]
+    x_arr = [calculate_value(num_str) for num_str in x_arr_s]
     if line_2 is not None:
       y_arr_s = line_2.split(',')
-      y_arr = [int(num) for num in y_arr_s]
+      y_arr = [calculate_value(num_str) for num_str in y_arr_s]
     else:
       y_arr = []
     if line_3 is not None:
       z_arr_s = line_3.split(',')
-      z_arr = [int(num) for num in z_arr_s]
+      z_arr = [calculate_value(num_str) for num_str in z_arr_s]
     else:
       z_arr = []
 
