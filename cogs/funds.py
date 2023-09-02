@@ -312,9 +312,11 @@ class funds(commands.Cog,name='funds'):
     ax.spines['bottom'].set_visible(True)
     ax.spines['left'].set_visible(True)
     plt.savefig('output_graph.png', dpi=300,transparent=True, bbox_inches='tight')
+    plt.close()
 
     await ctx.respond(content="",file=discord.File("output_graph.png"),ephemeral=ephemeral)
     os.remove("output_graph.png")
+    
     
       
 
