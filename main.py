@@ -33,7 +33,8 @@ extensions = [
   'cogs.weather',
   'cogs.wordle',
   'cogs.latex',
-  'cogs.funds'
+  'cogs.funds',
+  'cogs.graph'
 ]
 
 if __name__ == '__main__':  
