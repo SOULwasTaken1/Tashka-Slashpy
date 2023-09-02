@@ -53,7 +53,7 @@ This project obviously uses `/slash` commands. Few of the commands are listed be
 * use `/help command:render` to learn some basics of latex.  
 * Learn more about latex [here](http://www.malinc.se/math/latex/basiccodeen.php)
 
-## time:
+## Time:
 * This command is used for generating discord timestamps.
 * The syntaxes for timestamps in discord looks like `<t:UNIX_CODE_HERE:R>`
 * learn more about timestamps [here](https://gist.github.com/LeviSnoot/d9147767abeef2f770e9ddcd91eb85aa)
