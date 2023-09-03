@@ -121,16 +121,22 @@ class graph(commands.Cog,name='graph'):
                   color_3:Optional[str]="magenta",
                   ephemeral:Optional[bool]=False
                  ):
-                 
-    x_arr = process_line(line_1)
-    y_arr = process_line(line_2)
-    z_arr = process_line(line_3)
-
-    plot_three_lines(x_arr,"plot_graph.png",y_arr,z_arr,color_1,color_2,color_3)
     msg = await ctx.respond("please wait",ephemeral=ephemeral)
-    with open('plot_graph.png', 'rb') as f:
-              image = discord.File(f)
-    await msg.edit_original_response(content="",file=image)
+    try:             
+      x_arr = process_line(line_1)
+      y_arr = process_line(line_2)
+      z_arr = process_line(line_3)
+  
+      plot_three_lines(x_arr,"plot_graph.png",y_arr,z_arr,color_1,color_2,color_3)
+      
+      with open('plot_graph.png', 'rb') as f:
+                image = discord.File(f)
+  
+      await msg.edit_original_response(content="",file=image)
+    except Exception  as err:
+      embed=discord.Embed(title="Something went wrong...",description="## What went wrong?\n* You probably made a **typo**\n* You forgot to put a comma `,`\n* If you used the `log_b(x,b)` then check if `b>0` and `b≠1`.\n* Check if you made a **syntax error**", color=0xFFA500)
+      await msg.edit_original_response(content="",embed=embed)
+      
     os.remove("plot_graph.png")
 
 def setup(bot):
