@@ -10,13 +10,44 @@ from typing import Optional
 import numpy as np
 import re
 
+COLORS = [
+    'blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black', 'white',
+    'orange', 'purple', 'brown', 'pink', 'gray', 'gold', 'silver',
+    'navy', 'lime', 'teal', 'aqua', 'fuchsia', 'maroon', 'olive', 'indigo'
+]
+
+def log_b(x, base):
+  
+  if x <= 0 or base <= 0 or base == 1:
+    raise ValueError("Both 'x' and 'base' must be positive numbers and 'base' must not be 1.")
+  return np.log(x) / np.log(base)
+
+def log10(x):
+  return np.log10(x)
+
+def log_e(x):
+  return np.log_e(x)
+
+def process_line(line):
+    if line is None:
+        return []
+    
+    if line.find("for") != -1:
+      result = None
+      
+      
+      result = eval(f"[{line}]")
+      if isinstance(result, (list, tuple)):
+        return result
+      else:
+        return [result]
+    
+    return [calculate_value(num_str) for num_str in line.split(',')]
+
 
 def calculate_value(num_str):
-    if num_str.startswith("for"):
-        exec_globals = {}
-        exec(num_str, exec_globals)
-        return exec_globals.get('result', None)
-    elif re.match(r'^log\d+$', num_str):
+        
+    if re.match(r'^log\d+$', num_str):
         base = int(num_str[3:])
         return np.log(base)
     elif re.match(r'^\d+\^\d+$', num_str):
@@ -90,27 +121,10 @@ class graph(commands.Cog,name='graph'):
                   color_3:Optional[str]="magenta",
                   ephemeral:Optional[bool]=False
                  ):
-    if line_1.startswith("for"):
-      x_arr_s = [line_1]
-    else:
-      x_arr_s = line_1.split(',')
-    x_arr = [calculate_value(num_str) for num_str in x_arr_s]
-    if line_2 is not None:
-      if line_2.startswith("for"):
-        y_arr_s = [line_2]
-      else:
-        y_arr_s = line_2.split(',')
-      y_arr = [calculate_value(num_str) for num_str in y_arr_s]
-    else:
-      y_arr = []
-    if line_3 is not None:
-      if line_3.startswith("for"):
-        z_arr_s = [line_3]
-      else:
-        z_arr_s = line_3.split(',')
-      z_arr = [calculate_value(num_str) for num_str in z_arr_s]
-    else:
-      z_arr = []
+                 
+    x_arr = process_line(line_1)
+    y_arr = process_line(line_2)
+    z_arr = process_line(line_3)
 
     plot_three_lines(x_arr,"plot_graph.png",y_arr,z_arr,color_1,color_2,color_3)
     msg = await ctx.respond("please wait",ephemeral=ephemeral)
