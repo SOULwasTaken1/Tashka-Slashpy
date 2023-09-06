@@ -10,6 +10,8 @@ from typing import Optional
 import numpy as np
 import re
 
+
+
 COLORS = [
     'blue', 'green', 'red', 'cyan', 'magenta', 'yellow', 'black', 'white',
     'orange', 'purple', 'brown', 'pink', 'gray', 'gold', 'silver',
@@ -32,7 +34,7 @@ def process_line(line):
     if line is None:
         return []
     
-    if line.find("for") != -1:
+    if line.find("for") != -1 and line.find("os") == -1: #make sure no one can get the bot token using os
       result = None
       
       
@@ -133,9 +135,12 @@ class graph(commands.Cog,name='graph'):
                 image = discord.File(f)
   
       await msg.edit_original_response(content="",file=image)
-    except Exception  as err:
+
+    except:
       embed=discord.Embed(title="Something went wrong...",description="## What went wrong?\n* You probably made a **typo**\n* You forgot to put a comma `,`\n* If you used the `log_b(x,b)` then check if `b>0` and `b≠1`.\n* Check if you made a **syntax error**", color=0xFFA500)
       await msg.edit_original_response(content="",embed=embed)
+      
+      
       
     os.remove("plot_graph.png")
 
