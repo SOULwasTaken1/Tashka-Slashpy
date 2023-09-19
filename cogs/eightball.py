@@ -84,42 +84,12 @@ class eight_ball(commands.Cog,name='eight_ball'):
 
 
   
-  @slash_command(name="choose",description="Helps you to choose from upto 10 different options.")
-  async def choose(self,ctx,
-                   choice1,
-                   choice2:Optional[str]=None,
-                   choice3:Optional[str]=None,
-                   choice4:Optional[str]=None,
-                   choice5:Optional[str]=None,
-                   choice6:Optional[str]=None,
-                   choice7:Optional[str]=None,
-                   choice8:Optional[str]=None,
-                   choice9:Optional[str]=None,
-                   choice10:Optional[str]=None
-                  ):
+  @slash_command(name="choose",description="Separate your choices with comma")
+  async def choose(self,ctx,choice,ephemeral:Optional[bool]=False):
                     
     pfp = ctx.author.avatar
-    ChoiceList = []
-    if choice1 !=None:
-      ChoiceList.append(choice1)
-    if choice2 != None:
-      ChoiceList.append(choice2)
-    if choice3 != None:
-      ChoiceList.append(choice3)
-    if choice4 != None:
-      ChoiceList.append(choice4)
-    if choice5 != None:
-      ChoiceList.append(choice5)
-    if choice6 != None:
-      ChoiceList.append(choice6)
-    if choice7 != None:
-      ChoiceList.append(choice7)
-    if choice8 != None:
-      ChoiceList.append(choice8)
-    if choice9 != None:
-      ChoiceList.append(choice9)
-    if choice10 != None:
-      ChoiceList.append(choice10)
+    ChoiceList = choice.split(",")
+
     cont = f"""
 ```py
 ChoiceList = [{', '.join(['"{}"'.format(str(item)) for item in ChoiceList])}]
@@ -131,7 +101,7 @@ ChoiceList = [{', '.join(['"{}"'.format(str(item)) for item in ChoiceList])}]
     embed = discord.Embed(title='', description=f'**I choose** {random.choice(ChoiceList)}')
     embed.set_thumbnail(url=pfp)
     embed.set_author(name=f"{ctx.author.name}", icon_url=pfp)
-    await ctx.respond(embed=embed,view=view)
+    await ctx.respond(embed=embed,view=view,ephemeral=ephemeral)
 
 
 
