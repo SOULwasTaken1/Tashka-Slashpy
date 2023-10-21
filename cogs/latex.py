@@ -45,13 +45,14 @@ def modify_latex_string(elements, banned_list, break_point):
     o2 = ['dfrac', 'frac']
     if elements[i - 1] in o1 or elements[i-1] in o2 or elements[i-2] in o2:
         arr = break_exponent(item,break_point)
-
         if '}' in arr :  arr.remove('}')
         if '{' in arr : arr.remove('{')
+        
         res = []
         mod_item = ''
         for i, item in enumerate(arr):
           if any(banned in item for banned in break_point):
+            print(item)
             mod_item = item
           else:
             mod_item = r'\mathscr{' + item + '}'
@@ -61,8 +62,7 @@ def modify_latex_string(elements, banned_list, break_point):
     elif any(banned in item for banned in banned_list):
 
       modified_item = item
-    elif elements[i-1] == 'dfrac':
-      print(elements[i])
+
     elif elements[i] not in banned_list and elements[i-1] not in '_^':
         modified_item = r'\mathscr{' + item + '}'
     else:
@@ -134,10 +134,10 @@ class latex(commands.Cog,name='latex'):
     
     banned_list = ['^', '_', '\tan','\cos', '\sin',
      '\log', '\ln', 'e', '\\pi','\sec', r'\to', '\propto'
-     '\csc', '\cot', '\arcsin', '\arccos', r'\dfrac', 'dfrac'
+     '\csc', '\cot', '\arcsin', '\arccos', r'\\dfrac' ,r'\dfrac', 'dfrac'
      '\arctan', '\arccsc', '\\', '{', '}',  '\frac', 'frac', 'int',
-     '\\sum', '\\int', '\\lim', '\l\imsup', '\\prod', 'lim',
-     '\\liminf', '\\liminfsup', '\\liminfinf', '+', '-', ' ', '='
+     '\\sum', '\\int', '\\lim', '\l\imsup', '\\prod', 'lim', r'\sqrt',
+     '\\liminf', '\\liminfsup', '\\liminfinf', '+', '-', ' ', '=',
      '\\infty', '\\inftysim', '\\inftyn', '\\inftyne', '\\inftyne',
      '\\alpha', '\\beta', '\\gamma', '\\delta', '\\epsilon', '\\zeta',
      '\\eta', '\theta', '\iota', '\kappa', '\lambda', '\\mu', r'\nu',
@@ -152,7 +152,7 @@ class latex(commands.Cog,name='latex'):
       ]
     # break points for the function
     break_point = ['sec', 'csc', 'cot', 'sin', 'cos', r'tan', 'sec', 'csc',
-       'arcsec', 'arccsc', 'arccot', 'arcsin', 'arccos', 'arctan',
+       'arcsec', 'arccsc', 'arccot', 'arcsin', 'arccos', 'arctan', r'\sqrt' ,
       r'\to', r'\infty', 'ln', 'log', '\alpha', '\beta', '\gamma',
       r'\delta', r'\epsilon', '\zeta', '\eta', r'\theta', r'\iota',
       r'\kappa', '\lambda', '\mu', '\nu', '\omicron', '\rho','{', '}',
@@ -178,7 +178,9 @@ class latex(commands.Cog,name='latex'):
           "arccsc": "\arccsc",
           "arccot": "\arccot",
           "arcsec": "\arcsec",
-
+          " " : "\;",
+          "log" : "\log",
+          "ln" : "\ln"
       }
       
         
